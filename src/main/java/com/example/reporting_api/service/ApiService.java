@@ -42,9 +42,7 @@ public class ApiService {
     }
 
     public TransactionReportResponse getTransactionReport(String token, TransactionReportRequest reportRequest) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", token);
-        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpHeaders headers = buildHttpHeaders(token);
 
         HttpEntity<TransactionReportRequest> request = new HttpEntity<>(reportRequest, headers);
 
@@ -55,9 +53,7 @@ public class ApiService {
     }
 
     public TransactionQueryResponse queryTransactions(String token, TransactionQueryRequest queryRequest) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", token);
-        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpHeaders headers = buildHttpHeaders(token);
 
         HttpEntity<TransactionQueryRequest> request = new HttpEntity<>(queryRequest, headers);
 
@@ -67,10 +63,10 @@ public class ApiService {
         return response.getBody();
     }
 
+
+
     public GetTransactionResponse getTransaction(String token, GetTransactionRequest transactionRequest) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", token);
-        headers.setContentType(org.springframework.http.MediaType.APPLICATION_JSON);
+        HttpHeaders headers = buildHttpHeaders(token);
 
         HttpEntity<GetTransactionRequest> request = new HttpEntity<>(transactionRequest, headers);
 
@@ -81,9 +77,7 @@ public class ApiService {
     }
 
     public GetClientResponse getClient(String token, GetClientRequest clientRequest) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", token);
-        headers.setContentType(org.springframework.http.MediaType.APPLICATION_JSON);
+        HttpHeaders headers = buildHttpHeaders(token);
 
         HttpEntity<GetClientRequest> request = new HttpEntity<>(clientRequest, headers);
 
@@ -91,5 +85,11 @@ public class ApiService {
                 clientUrl, HttpMethod.POST, request, GetClientResponse.class);
 
         return response.getBody();
+    }
+    private static HttpHeaders buildHttpHeaders(String token) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", token);
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        return headers;
     }
 }

@@ -11,10 +11,8 @@ import java.util.Date;
 public class TransactionQueryRequest {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date fromDate;
-
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date toDate;
-
     private String status;
     private String operation;
     private int merchantId;
