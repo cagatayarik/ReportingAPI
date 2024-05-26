@@ -11,14 +11,4 @@ public class TransactionReportResponse {
     private String status;
     private List<Response> response;
 
-
-    @Getter
-    @Setter
-    public static class Response {
-        private int count;
-        private int total;
-        private String currency;
-
-
-    }
 }

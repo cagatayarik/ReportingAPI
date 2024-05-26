@@ -3,7 +3,9 @@ package com.example.reporting_api.controller;
 import com.example.reporting_api.model.request.*;
 import com.example.reporting_api.model.response.*;
 import com.example.reporting_api.service.ApiService;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,14 +21,15 @@ public class ApiController {
     }
 
     @PostMapping("/transactions/report")
-    public TransactionReportResponse getTransactionReport(@RequestHeader("Authorization") String token,
+    public TransactionReportResponse getTransactionReport(@RequestHeader(value = "authorization") @NotNull String authorization,
                                                           @RequestBody TransactionReportRequest reportRequest) {
-        return apiService.getTransactionReport(token, reportRequest);
+        return apiService.getTransactionReport(authorization, reportRequest);
     }
 
     @PostMapping("/transaction/list")
-    public TransactionQueryResponse queryTransactions(@RequestHeader("Authorization") String token, @RequestBody TransactionQueryRequest queryRequest) {
-        return apiService.queryTransactions(token, queryRequest);
+    public TransactionQueryResponse queryTransactions(@RequestHeader(value = "authorization") @NotNull String authorization,
+                                                      @RequestBody TransactionQueryRequest queryRequest) {
+        return apiService.queryTransactions(authorization, queryRequest);
     }
 
     @PostMapping("/transaction")
