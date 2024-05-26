@@ -33,12 +33,12 @@ public class ApiController {
     }
 
     @PostMapping("/transaction")
-    public GetTransactionResponse getTransaction(@RequestHeader("Authorization") String token, @RequestBody GetTransactionRequest transactionRequest) {
-        return apiService.getTransaction(token, transactionRequest);
+    public GetTransactionResponse getTransaction(@RequestHeader(value = "authorization") @NotNull String authorization, @RequestBody GetTransactionRequest transactionRequest) {
+        return apiService.getTransaction(authorization, transactionRequest);
     }
 
     @PostMapping("/client")
-    public GetClientResponse getClient(@RequestHeader("Authorization") String token, @RequestBody GetClientRequest clientRequest) {
-        return apiService.getClient(token, clientRequest);
+    public GetClientResponse getClient(@RequestHeader(value = "authorization") @NotNull String authorization, @RequestBody GetClientRequest clientRequest) {
+        return apiService.getClient(authorization, clientRequest);
     }
 }

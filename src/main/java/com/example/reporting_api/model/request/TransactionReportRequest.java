@@ -2,13 +2,17 @@ package com.example.reporting_api.model.request;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class TransactionReportRequest {
 
     @JsonFormat(pattern = "yyyy-MM-dd")
@@ -20,4 +24,6 @@ public class TransactionReportRequest {
     private Date toDate;
     private Integer merchant;
     private Integer acquirer;
+
+
 }
