@@ -1,6 +1,5 @@
 package com.example.reporting_api.controller;
 
-import com.example.reporting_api.config.TestSecurityConfig;
 import com.example.reporting_api.model.request.TransactionReportRequest;
 import com.example.reporting_api.model.response.TransactionReportResponse;
 import com.example.reporting_api.service.ApiService;
@@ -25,7 +24,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(ApiController.class)
-@Import(TestSecurityConfig.class)
 public class ApiControllerTransactionReportTest {
 
     @Autowired

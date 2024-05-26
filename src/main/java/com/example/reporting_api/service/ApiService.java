@@ -31,14 +31,14 @@ public class ApiService {
         this.restTemplate = restTemplate;
     }
 
-    public JwtResponse login(LoginRequest loginRequest) {
+    public ResponseEntity<JwtResponse> login(LoginRequest loginRequest) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         HttpEntity<LoginRequest> request = new HttpEntity<>(loginRequest, headers);
 
         ResponseEntity<JwtResponse> response = restTemplate.postForEntity(loginUrl, request, JwtResponse.class);
-        return response.getBody();
+        return response;
     }
 
     public TransactionReportResponse getTransactionReport(String token, TransactionReportRequest reportRequest) {

@@ -1,11 +1,12 @@
 package com.example.reporting_api.controller;
 
+
 import com.example.reporting_api.model.request.*;
 import com.example.reporting_api.model.response.*;
 import com.example.reporting_api.service.ApiService;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,7 +17,7 @@ public class ApiController {
     private ApiService apiService;
 
     @PostMapping("/merchant/user/login")
-    public JwtResponse login(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<JwtResponse> login(@RequestBody LoginRequest loginRequest) {
         return apiService.login(loginRequest);
     }
 

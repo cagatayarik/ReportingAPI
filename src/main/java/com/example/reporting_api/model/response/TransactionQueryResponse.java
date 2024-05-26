@@ -6,7 +6,6 @@ import lombok.Setter;
 import java.util.List;
 @Getter
 @Setter
-//Todo
 public class TransactionQueryResponse {
     private Integer per_page;
     private Integer current_page;
