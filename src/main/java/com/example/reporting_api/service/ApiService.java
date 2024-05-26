@@ -41,7 +41,7 @@ public class ApiService {
         return response;
     }
 
-    public TransactionReportResponse getTransactionReport(String token, TransactionReportRequest reportRequest) {
+    public ResponseEntity<TransactionReportResponse> getTransactionReport(String token, TransactionReportRequest reportRequest) {
         HttpHeaders headers = buildHttpHeaders(token);
 
         HttpEntity<TransactionReportRequest> request = new HttpEntity<>(reportRequest, headers);
@@ -49,10 +49,10 @@ public class ApiService {
         ResponseEntity<TransactionReportResponse> response = restTemplate.exchange(
                 reportUrl, HttpMethod.POST, request, TransactionReportResponse.class);
 
-        return response.getBody();
+        return response;
     }
 
-    public TransactionQueryResponse queryTransactions(String token, TransactionQueryRequest queryRequest) {
+    public ResponseEntity<TransactionQueryResponse> queryTransactions(String token, TransactionQueryRequest queryRequest) {
         HttpHeaders headers = buildHttpHeaders(token);
 
         HttpEntity<TransactionQueryRequest> request = new HttpEntity<>(queryRequest, headers);
@@ -60,12 +60,12 @@ public class ApiService {
         ResponseEntity<TransactionQueryResponse> response = restTemplate.exchange(
                 queryUrl, HttpMethod.POST, request, TransactionQueryResponse.class);
 
-        return response.getBody();
+        return response;
     }
 
 
 
-    public GetTransactionResponse getTransaction(String token, GetTransactionRequest transactionRequest) {
+    public ResponseEntity<GetTransactionResponse> getTransaction(String token, GetTransactionRequest transactionRequest) {
         HttpHeaders headers = buildHttpHeaders(token);
 
         HttpEntity<GetTransactionRequest> request = new HttpEntity<>(transactionRequest, headers);
@@ -73,10 +73,10 @@ public class ApiService {
         ResponseEntity<GetTransactionResponse> response = restTemplate.exchange(
                 transactionUrl, HttpMethod.POST, request, GetTransactionResponse.class);
 
-        return response.getBody();
+        return response;
     }
 
-    public GetClientResponse getClient(String token, GetClientRequest clientRequest) {
+    public ResponseEntity<GetClientResponse> getClient(String token, GetClientRequest clientRequest) {
         HttpHeaders headers = buildHttpHeaders(token);
 
         HttpEntity<GetClientRequest> request = new HttpEntity<>(clientRequest, headers);
@@ -84,7 +84,7 @@ public class ApiService {
         ResponseEntity<GetClientResponse> response = restTemplate.exchange(
                 clientUrl, HttpMethod.POST, request, GetClientResponse.class);
 
-        return response.getBody();
+        return response;
     }
     private static HttpHeaders buildHttpHeaders(String token) {
         HttpHeaders headers = new HttpHeaders();
