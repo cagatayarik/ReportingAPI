@@ -1,10 +1,13 @@
 package com.example.reporting_api.service;
 
+import com.example.reporting_api.messages.ErrorMessages;
+import com.example.reporting_api.model.enums.Status;
 import com.example.reporting_api.model.request.*;
 import com.example.reporting_api.model.response.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 @Service
@@ -33,12 +36,16 @@ public class ApiService {
 
     public ResponseEntity<JwtResponse> login(LoginRequest loginRequest) {
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-
-        HttpEntity<LoginRequest> request = new HttpEntity<>(loginRequest, headers);
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            HttpEntity<LoginRequest> request = new HttpEntity<>(loginRequest, headers);
 
         ResponseEntity<JwtResponse> response = restTemplate.postForEntity(loginUrl, request, JwtResponse.class);
+        JwtResponse jwtResponse = response.getBody();
+
+        if (jwtResponse == null || !(jwtResponse.getStatus().equals(Status.APPROVED.getName())) || jwtResponse.getToken() == null) {
+            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, ErrorMessages.LOGIN_ERROR);
+        }
         return response;
     }
 
@@ -49,6 +56,12 @@ public class ApiService {
 
         ResponseEntity<TransactionReportResponse> response = restTemplate.exchange(
                 reportUrl, HttpMethod.POST, request, TransactionReportResponse.class);
+
+        TransactionReportResponse transactionReportResponse = response.getBody();
+
+        if(transactionReportResponse == null || !(transactionReportResponse.getStatus().equals(Status.APPROVED.getName()))) {
+            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, ErrorMessages.TRANSACTION_ERROR);
+        }
 
         return response;
     }
@@ -61,7 +74,7 @@ public class ApiService {
         ResponseEntity<TransactionQueryResponse> response = restTemplate.exchange(
                 queryUrl, HttpMethod.POST, request, TransactionQueryResponse.class);
 
-        var newModel = response.getBody().getData().stream().filter(x->x.getRefundable());
+//        var newModel = response.getBody().getData().stream().filter(x->x.getRefundable());
 
         return response;
     }
