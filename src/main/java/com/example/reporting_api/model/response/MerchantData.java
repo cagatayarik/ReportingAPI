@@ -1,11 +1,11 @@
 package com.example.reporting_api.model.response;
 
+import com.example.reporting_api.model.response.abstracts.MerchantInfoCommon;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class MerchantInfo {
-    private Integer id;
+public class MerchantData extends MerchantInfoCommon {
     private String name;
 }

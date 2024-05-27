@@ -1,11 +1,9 @@
 package com.example.reporting_api.model.response.abstracts;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
-public class CustomerInfoTransactionQuery {
+@Data
+public class CustomerInfoCommon {
 
     private String number;
     private String email;

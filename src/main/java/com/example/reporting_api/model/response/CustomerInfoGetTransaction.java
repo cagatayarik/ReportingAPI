@@ -1,6 +1,6 @@
 package com.example.reporting_api.model.response;
 
-import com.example.reporting_api.model.response.abstracts.CustomerInfoTransactionQuery;
+import com.example.reporting_api.model.response.abstracts.CustomerInfoCommon;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-public class CustomerInfoGetTransaction extends CustomerInfoTransactionQuery {
+public class CustomerInfoGetTransaction extends CustomerInfoCommon {
 
 
     private Integer id;

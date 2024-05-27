@@ -23,23 +23,25 @@ public class ApiController {
 
     @PostMapping("/transactions/report")
     public ResponseEntity<TransactionReportResponse> getTransactionReport(@RequestHeader(value = "authorization") @NotNull String authorization,
-                                                          @RequestBody TransactionReportRequest reportRequest) {
+                                                                          @RequestBody TransactionReportRequest reportRequest) {
         return apiService.getTransactionReport(authorization, reportRequest);
     }
 
     @PostMapping("/transaction/list")
     public ResponseEntity<TransactionQueryResponse> queryTransactions(@RequestHeader(value = "authorization") @NotNull String authorization,
-                                                      @RequestBody TransactionQueryRequest queryRequest) {
+                                                                      @RequestBody TransactionQueryRequest queryRequest) {
         return apiService.queryTransactions(authorization, queryRequest);
     }
 
     @PostMapping("/transaction")
-    public ResponseEntity<GetTransactionResponse> getTransaction(@RequestHeader(value = "authorization") @NotNull String authorization, @RequestBody GetTransactionRequest transactionRequest) {
+    public ResponseEntity<GetTransactionResponse> getTransaction(@RequestHeader(value = "authorization") @NotNull String authorization,
+                                                                 @RequestBody GetTransactionRequest transactionRequest) {
         return apiService.getTransaction(authorization, transactionRequest);
     }
 
     @PostMapping("/client")
-    public ResponseEntity<GetClientResponse> getClient(@RequestHeader(value = "authorization") @NotNull String authorization, @RequestBody GetClientRequest clientRequest) {
+    public ResponseEntity<GetClientResponse> getClient(@RequestHeader(value = "authorization") @NotNull String authorization,
+                                                       @RequestBody GetClientRequest clientRequest) {
         return apiService.getClient(authorization, clientRequest);
     }
 }

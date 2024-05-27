@@ -1,10 +1,8 @@
 package com.example.reporting_api.model.response;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class AcquirerInfo {
     private Integer id;
     private String name;
