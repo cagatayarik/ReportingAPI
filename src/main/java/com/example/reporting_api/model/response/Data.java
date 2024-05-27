@@ -11,7 +11,7 @@ import java.util.List;
 @Setter
 public class Data {
 
-    private List<FX> fx;
+    private List<MerchantFX> fx;
     private List<CustomerInfoCommon>  customerInfo;
     private List<MerchantData> merchantInfo;
     private List<Boolean> ipn;

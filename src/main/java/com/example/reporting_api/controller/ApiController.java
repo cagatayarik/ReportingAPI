@@ -40,8 +40,8 @@ public class ApiController {
     }
 
     @PostMapping("/client")
-    public ResponseEntity<GetClientResponse> getClient(@RequestHeader(value = "authorization") @NotNull String authorization,
-                                                       @RequestBody GetClientRequest clientRequest) {
+    public ResponseEntity<ClientResponse> getClient(@RequestHeader(value = "authorization") @NotNull String authorization,
+                                                    @RequestBody ClientRequest clientRequest) {
         return apiService.getClient(authorization, clientRequest);
     }
 }

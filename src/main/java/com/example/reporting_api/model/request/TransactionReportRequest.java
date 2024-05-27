@@ -26,4 +26,8 @@ public class TransactionReportRequest {
     private Integer acquirer;
 
 
+    public TransactionReportRequest(Date fromDate, Date toDate) {
+        this.fromDate = fromDate;
+        this.toDate = toDate;
+    }
 }

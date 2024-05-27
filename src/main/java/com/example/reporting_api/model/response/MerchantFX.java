@@ -4,7 +4,6 @@ import lombok.Data;
 
 @Data
 public class MerchantFX {
+    private MerchantFXInfo merchant;
 
-    private Double originalAmount;
-    private String originalCurrency;
 }

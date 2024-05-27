@@ -32,6 +32,7 @@ public class ApiService {
     }
 
     public ResponseEntity<JwtResponse> login(LoginRequest loginRequest) {
+
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
@@ -60,6 +61,8 @@ public class ApiService {
         ResponseEntity<TransactionQueryResponse> response = restTemplate.exchange(
                 queryUrl, HttpMethod.POST, request, TransactionQueryResponse.class);
 
+        var newModel = response.getBody().getData().stream().filter(x->x.getRefundable());
+
         return response;
     }
 
@@ -76,13 +79,13 @@ public class ApiService {
         return response;
     }
 
-    public ResponseEntity<GetClientResponse> getClient(String token, GetClientRequest clientRequest) {
+    public ResponseEntity<ClientResponse> getClient(String token, ClientRequest clientRequest) {
         HttpHeaders headers = buildHttpHeaders(token);
 
-        HttpEntity<GetClientRequest> request = new HttpEntity<>(clientRequest, headers);
+        HttpEntity<ClientRequest> request = new HttpEntity<>(clientRequest, headers);
 
-        ResponseEntity<GetClientResponse> response = restTemplate.exchange(
-                clientUrl, HttpMethod.POST, request, GetClientResponse.class);
+        ResponseEntity<ClientResponse> response = restTemplate.exchange(
+                clientUrl, HttpMethod.POST, request, ClientResponse.class);
 
         return response;
     }

@@ -10,8 +10,7 @@ import java.time.LocalDateTime;
 @Setter
 public class CustomerInfoGetTransaction extends CustomerInfoCommon {
 
-
-    private Integer id;
+    private Long id;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private LocalDateTime deletedAt;

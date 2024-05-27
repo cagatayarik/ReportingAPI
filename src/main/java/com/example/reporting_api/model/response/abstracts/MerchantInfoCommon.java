@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class MerchantInfoCommon {
-    private Integer id;
+    private Long id;
 
 }
