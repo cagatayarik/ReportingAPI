@@ -1,6 +1,7 @@
 package com.example.reporting_api.service;
 
 import com.example.reporting_api.messages.ErrorMessages;
+import com.example.reporting_api.model.enums.PaymentMethod;
 import com.example.reporting_api.model.enums.Status;
 import com.example.reporting_api.model.request.*;
 import com.example.reporting_api.model.response.*;
@@ -10,6 +11,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.Arrays;
+import java.util.List;
 
 @Service
 public class ApiService {
@@ -70,6 +74,22 @@ public class ApiService {
     public ResponseEntity<TransactionQueryResponse> queryTransactions(String token, TransactionQueryRequest queryRequest) {
         HttpHeaders headers = buildHttpHeaders(token);
         HttpEntity<TransactionQueryRequest> request = new HttpEntity<>(queryRequest, headers);
+
+        String requestedStatus = queryRequest.getStatus();
+        List<String> statusList = Arrays.stream(Status.values()).map(Status::getName).toList();
+        if (!(requestedStatus==null) && !(statusList.contains(queryRequest.getStatus()))){
+
+        throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, ErrorMessages.STATUS_ERROR);
+        }
+
+        String requestedPaymentMethod = queryRequest.getPaymentMethod();
+        List<String> paymentList = Arrays.stream(PaymentMethod.values()).map(PaymentMethod::getPayment).toList();
+        if (!(requestedPaymentMethod==null) && !(paymentList.contains(queryRequest.getPaymentMethod()))){
+            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, ErrorMessages.PAYMENT_METHOD_ERROR);
+        }
+
+        //Operation ve FilterField Error icinde aynisi yap.
+
 
         try {
             ResponseEntity<TransactionQueryResponse> response = restTemplate.exchange(
