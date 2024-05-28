@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 @Service
@@ -68,15 +69,23 @@ public class ApiService {
 
     public ResponseEntity<TransactionQueryResponse> queryTransactions(String token, TransactionQueryRequest queryRequest) {
         HttpHeaders headers = buildHttpHeaders(token);
-
         HttpEntity<TransactionQueryRequest> request = new HttpEntity<>(queryRequest, headers);
 
-        ResponseEntity<TransactionQueryResponse> response = restTemplate.exchange(
-                queryUrl, HttpMethod.POST, request, TransactionQueryResponse.class);
+        try {
+            ResponseEntity<TransactionQueryResponse> response = restTemplate.exchange(
+                    queryUrl, HttpMethod.POST, request, TransactionQueryResponse.class);
 
-//        var newModel = response.getBody().getData().stream().filter(x->x.getRefundable());
-
-        return response;
+            if (!response.getStatusCode().is2xxSuccessful()) {
+                return ResponseEntity
+                        .status(HttpStatus.BAD_REQUEST)
+                        .body(null);
+            }
+            return response;
+        } catch (RestClientException e) {
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
     }
 
 
@@ -85,11 +94,19 @@ public class ApiService {
         HttpHeaders headers = buildHttpHeaders(token);
 
         HttpEntity<GetTransactionRequest> request = new HttpEntity<>(transactionRequest, headers);
-
+    try{
         ResponseEntity<GetTransactionResponse> response = restTemplate.exchange(
                 transactionUrl, HttpMethod.POST, request, GetTransactionResponse.class);
-
+        if(!response.getStatusCode().is2xxSuccessful()){
+            throw new HttpClientErrorException(response.getStatusCode(),ErrorMessages.TRANSACTION_ERROR);
+        }
         return response;
+    }catch(RestClientException e) {
+        throw new HttpClientErrorException(HttpStatus.INTERNAL_SERVER_ERROR,ErrorMessages.TRANSACTION_ERROR);
+    }
+
+
+
     }
 
     public ResponseEntity<ClientResponse> getClient(String token, ClientRequest clientRequest) {

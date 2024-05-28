@@ -4,5 +4,6 @@ public class ErrorMessages {
     private ErrorMessages (){}
     public static final String LOGIN_ERROR = "Login request is not approved";
     public static final String TRANSACTION_ERROR = "Transaction request is not approved";
+    public static final String TRANSACTION_LIST_ERROR = "Can not list transactions";
 
 }
