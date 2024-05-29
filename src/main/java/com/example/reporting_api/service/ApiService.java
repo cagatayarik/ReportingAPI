@@ -17,7 +17,6 @@ import java.util.List;
 @Service
 public class ApiService {
 
-
     @Value("${api.login.url}")
     private String loginUrl;
 
