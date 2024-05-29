@@ -77,12 +77,23 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.10.1</version> <!-- Güncellenmiş Maven Compiler Plugin sürümü -->
+				<version>3.10.1</version>
 				<configuration>
-					<release>20</release> <!-- 'source' ve 'target' yerine doğrudan 'release' kullanımı -->
-					<verbose>true</verbose>
+					<source>20</source>
+					<target>20</target>
 				</configuration>
 			</plugin>
+
+
+<!--			<plugin>-->
+<!--				<groupId>org.apache.maven.plugins</groupId>-->
+<!--				<artifactId>maven-compiler-plugin</artifactId>-->
+<!--				<version>3.10.1</version> &lt;!&ndash; Güncellenmiş Maven Compiler Plugin sürümü &ndash;&gt;-->
+<!--				<configuration>-->
+<!--					<release>20</release> &lt;!&ndash; 'source' ve 'target' yerine doğrudan 'release' kullanımı &ndash;&gt;-->
+<!--					<verbose>true</verbose>-->
+<!--				</configuration>-->
+<!--			</plugin>-->
 		</plugins>
 	</build>
 
