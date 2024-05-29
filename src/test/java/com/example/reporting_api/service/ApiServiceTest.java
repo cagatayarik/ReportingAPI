@@ -1,7 +1,6 @@
 package com.example.reporting_api.service;
 
 import com.example.reporting_api.model.request.LoginRequest;
-import com.example.reporting_api.model.request.TransactionReportRequest;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
