@@ -80,7 +80,6 @@
 				</configuration>
 			</plugin>
 
-			<!-- Maven Compiler Plugin ekleniyor -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -88,11 +87,11 @@
 				<configuration>
 					<source>17</source>
 					<target>17</target>
-					<compilerArgs>
-						<arg>-Xlint:unchecked</arg>
-					</compilerArgs>
+					<release>17</release>
+					<verbose>true</verbose>
 				</configuration>
 			</plugin>
+
 		</plugins>
 	</build>
 
