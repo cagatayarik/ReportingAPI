@@ -1,0 +1,454 @@
+{
+	"info": {
+		"_postman_id": "8147cd1b-22bf-42ce-8ef2-a769cedba2fb",
+		"name": "Reporting-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32024546"
+	},
+	"item": [
+		{
+			"name": "test url",
+			"item": [
+				{
+					"name": "TEST Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"demo@financialhouse.io\",\n    \"password\":\"cjaiU8CV\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://sandbox-reporting.rpdpymnt.com/api/v3/merchant/user/login",
+							"protocol": "https",
+							"host": [
+								"sandbox-reporting",
+								"rpdpymnt",
+								"com"
+							],
+							"path": [
+								"api",
+								"v3",
+								"merchant",
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TEST Transaction Report",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fromDate\": \"2015-07-01\",\n    \"toDate\": \"2023-10-01\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://sandbox-reporting.rpdpymnt.com/api/v3/transactions/report",
+							"protocol": "https",
+							"host": [
+								"sandbox-reporting",
+								"rpdpymnt",
+								"com"
+							],
+							"path": [
+								"api",
+								"v3",
+								"transactions",
+								"report"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TEST Transaction Query",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fromDate\": \"2015-07-01\",\n    \"toDate\": \"2023-10-01\",\n    \"merchantId\": 3,\n    \"page\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://sandbox-reporting.rpdpymnt.com/api/v3/transaction/list",
+							"protocol": "https",
+							"host": [
+								"sandbox-reporting",
+								"rpdpymnt",
+								"com"
+							],
+							"path": [
+								"api",
+								"v3",
+								"transaction",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TEST Get Transaction",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"transactionId\": \"1067301-1675430916-3\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://sandbox-reporting.rpdpymnt.com/api/v3/transaction",
+							"protocol": "https",
+							"host": [
+								"sandbox-reporting",
+								"rpdpymnt",
+								"com"
+							],
+							"path": [
+								"api",
+								"v3",
+								"transaction"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TEST Get Client",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							},
+							{
+								"key": "",
+								"value": "",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"transactionId\": \"1067301-1675430916-3\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://sandbox-reporting.rpdpymnt.com/api/v3/client",
+							"protocol": "https",
+							"host": [
+								"sandbox-reporting",
+								"rpdpymnt",
+								"com"
+							],
+							"path": [
+								"api",
+								"v3",
+								"client"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.environment.set(\"token\", jsonData.token);",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"demo@financialhouse.io\",\n    \"password\": \"cjaiU8CV\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain}}/api/v3/merchant/user/login",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"api",
+						"v3",
+						"merchant",
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction Report",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"fromDate\": \"2010-07-01\",\n  \"toDate\": \"2023-10-01\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain}}/api/v3/transactions/report",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"api",
+						"v3",
+						"transactions",
+						"report"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction Query",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fromDate\": \"2015-07-01\",\n    \"toDate\": \"2023-10-01\",\n    \"merchantId\": 3,\n    \"page\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain}}/api/v3/transaction/list",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"api",
+						"v3",
+						"transaction",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Transaction",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"transactionId\": \"1067301-1675430916-3\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain}}/api/v3/transaction",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"api",
+						"v3",
+						"transaction"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Client",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"transactionId\": \"1067301-1675430916-3\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain}}/api/v3/client",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"api",
+						"v3",
+						"client"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtZXJjaGFudFVzZXJJZCI6NTMsInJvbGUiOiJ1c2VyIiwibWVyY2hhbnRJZCI6Mywic3ViTWVyY2hhbnRJZHMiOlszLDc0LDkzLDExOTEsMTI5NSwxMTEsMTM3LDEzOCwxNDIsMTQ1LDE0NiwxNTMsMzM0LDE3NSwxODQsMjIwLDIyMSwyMjIsMjIzLDI5NCwzMjIsMzIzLDMyNywzMjksMzMwLDM0OSwzOTAsMzkxLDQ1NSw0NTYsNDc5LDQ4OCw1NjMsMTE0OSw1NzAsMTEzOCwxMTU2LDExNTcsMTE1OCwxMTc5LDEyOTMsMTI5NCwxMzA2LDEzMDcsMTMyNCwxMzMxLDEzMzgsMTMzOSwxMzQxLDEzNDYsMTM0NywxMzQ4LDEzNDksMTM1MywxMzgzLDEzODQsMTM4NV0sInRpbWVzdGFtcCI6MTcxNjU3MzM4M30.P9qnhCN-8LAn6G_dKwRus7e5bDX4eT5e_G6jinY-rbw",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
