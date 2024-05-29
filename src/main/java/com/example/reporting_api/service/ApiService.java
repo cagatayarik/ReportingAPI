@@ -1,8 +1,7 @@
 package com.example.reporting_api.service;
 
 import com.example.reporting_api.messages.ErrorMessages;
-import com.example.reporting_api.model.enums.PaymentMethod;
-import com.example.reporting_api.model.enums.Status;
+import com.example.reporting_api.model.enums.*;
 import com.example.reporting_api.model.request.*;
 import com.example.reporting_api.model.response.*;
 import org.springframework.beans.factory.annotation.Value;
@@ -40,10 +39,9 @@ public class ApiService {
     }
 
     public ResponseEntity<JwtResponse> login(LoginRequest loginRequest) {
-
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-            HttpEntity<LoginRequest> request = new HttpEntity<>(loginRequest, headers);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<LoginRequest> request = new HttpEntity<>(loginRequest, headers);
 
         ResponseEntity<JwtResponse> response = restTemplate.postForEntity(loginUrl, request, JwtResponse.class);
         JwtResponse jwtResponse = response.getBody();
@@ -88,8 +86,23 @@ public class ApiService {
             throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, ErrorMessages.PAYMENT_METHOD_ERROR);
         }
 
-        //Operation ve FilterField Error icinde aynisi yap.
+        String requestedOperation = queryRequest.getOperation();
+        List<String> operationList = Arrays.stream(Operation.values()).map(Operation::getValue).toList();
+        if (!(requestedOperation==null) && !(operationList.contains(queryRequest.getPaymentMethod()))) {
+            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, ErrorMessages.OPERATION_METHOD_ERROR);
+        }
 
+        String requestedFilterField = queryRequest.getFilterField();
+        List<String> filterFieldList = Arrays.stream(FilterField.values()).map(FilterField::getDisplayName).toList();
+        if (!(requestedFilterField==null) && !(filterFieldList.contains(queryRequest.getFilterField()))) {
+            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, ErrorMessages.FILTER_FIELD_METHOD_ERROR);
+        }
+
+        String requestedErrorCode = queryRequest.getErrorCode();
+        List<String> errorCodeList = Arrays.stream(ErrorCode.values()).map(ErrorCode::getDescription).toList();
+        if (!(requestedErrorCode==null) && !(errorCodeList.contains(queryRequest.getFilterField()))) {
+            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, ErrorMessages.ERROR_CODE_METHOD_ERROR);
+        }
 
         try {
             ResponseEntity<TransactionQueryResponse> response = restTemplate.exchange(

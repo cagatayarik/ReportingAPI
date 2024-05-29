@@ -8,13 +8,21 @@ import java.util.List;
 @Setter
 public class TransactionQueryResponse {
     private Long current_page;
+
     private String first_page_url;
+
     private Long from;
+
     private String next_page_url;
+
     private String path;
+
     private Long per_page;
+
     private String prev_page_url;
+
     private Long to;
+
     private List<GetTransactionResponse> data;
 
     }

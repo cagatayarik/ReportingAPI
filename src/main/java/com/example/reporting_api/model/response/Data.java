@@ -12,10 +12,16 @@ import java.util.List;
 public class Data {
 
     private List<MerchantFX> fx;
+
     private List<CustomerInfoCommon>  customerInfo;
+
     private List<MerchantData> merchantInfo;
+
     private List<Boolean> ipn;
+
     private List<TransactionInfoCommon> transaction;
+
     private List<AcquirerInfo> acquirerInfo;
+
     private Boolean refundable;
 }

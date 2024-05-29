@@ -6,8 +6,11 @@ import lombok.Data;
 public class CustomerInfoCommon {
 
     private String number;
+
     private String email;
+
     private String billingFirstName;
+
     private String billingLastName;
 
 

@@ -14,7 +14,6 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TransactionReportRequest {
-
     @JsonFormat(pattern = "yyyy-MM-dd")
     @NotNull
     private Date fromDate;

@@ -9,7 +9,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Response {
     private Long count;
+
     private Long total;
+
     private String currency;
 
 

@@ -6,7 +6,10 @@ import lombok.Data;
 public class MerchantFXInfo {
 
     private Double originalAmount;
+
     private String originalCurrency;
+
     private Double convertedAmount;
+
     private String convertedCurrency;
 }

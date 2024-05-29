@@ -5,7 +5,10 @@ import lombok.Data;
 @Data
 public class Agent {
     private Integer id;
+
     private String customerIp;
+
     private String customerUserAgent;
+
     private String merchantIp;
 }
