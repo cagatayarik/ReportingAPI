@@ -84,16 +84,6 @@
 				</configuration>
 			</plugin>
 
-
-<!--			<plugin>-->
-<!--				<groupId>org.apache.maven.plugins</groupId>-->
-<!--				<artifactId>maven-compiler-plugin</artifactId>-->
-<!--				<version>3.10.1</version> &lt;!&ndash; Güncellenmiş Maven Compiler Plugin sürümü &ndash;&gt;-->
-<!--				<configuration>-->
-<!--					<release>20</release> &lt;!&ndash; 'source' ve 'target' yerine doğrudan 'release' kullanımı &ndash;&gt;-->
-<!--					<verbose>true</verbose>-->
-<!--				</configuration>-->
-<!--			</plugin>-->
 		</plugins>
 	</build>
 
