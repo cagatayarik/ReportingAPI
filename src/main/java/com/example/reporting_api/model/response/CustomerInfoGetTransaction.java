@@ -4,7 +4,6 @@ import com.example.reporting_api.model.response.abstracts.CustomerInfoCommon;
 import lombok.Data;
 import java.time.LocalDateTime;
 
-
 @Data
 public class CustomerInfoGetTransaction extends CustomerInfoCommon {
 
